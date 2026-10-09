@@ -1,0 +1,3 @@
+# nunca publicar o código do app sem criptografia
+app.html
+*.plain.html
