@@ -1,0 +1,39 @@
+# Agente Eyes: busca os preços dos produtos na Mambo, St Marche e Carrefour e publica precos.json no site.
+# Roda sozinho 2x por dia (07:07 e 13:07 em Brasília) e quando alguém clica em "Run workflow" na aba Actions.
+name: Eyes
+
+on:
+  schedule:
+    - cron: "7 10,16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: eyes
+  cancel-in-progress: false
+
+jobs:
+  eyes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Busca os preços
+        run: node eyes/eyes.mjs
+      - name: Publica precos.json
+        run: |
+          git config user.name "Eyes"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add precos.json
+          if git diff --cached --quiet; then echo "Sem mudança de preço"; exit 0; fi
+          git commit -m "Eyes: preços concorrentes $(TZ=America/Sao_Paulo date '+%d/%m %H:%M')"
+          git push origin HEAD:main
+          git push origin HEAD:gh-pages
