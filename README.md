@@ -1,7 +1,7 @@
 # Solare
 Solare is love solare is life
 
-Assistente solar (Clima, Venda, Cálculo de DC e Preços concorrentes) com acesso por usuário e senha.
+Assistente solar (Clima, Venda de Sobremesas, Cálculo de DC e Preços concorrentes) com acesso por usuário e senha.
 
 O `index.html` publicado contém o app inteiro **criptografado** (AES-GCM 256, chave derivada de usuário + senha com PBKDF2-SHA256, 600.000 iterações). Sem as credenciais, o conteúdo não pode ser lido, nem olhando o código-fonte.
 
