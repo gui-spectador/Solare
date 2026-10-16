@@ -222,12 +222,12 @@ await Promise.all(Object.entries(STORES).map(([k, st]) => pool(itens, 2, async i
     const { best, cands } = await lookup(st, it.desc);
     const prev = ((oldBy.get(it.desc.toUpperCase()) || {}).lojas || {})[k];
     const slim = c => ({ nome: c.nome, preco: c.preco, de: c.de, url: c.url, score: c.score, disp: c.disp });
-    const r = best ? { ...slim(best), img: best.img, ean: best.ean } : null;
+    const r = best ? { ...slim(best), ean: best.ean } : null;
     if (r && prev && prev.url === r.url) {
       if (prev.preco !== r.preco) { r.ant = prev.preco; r.antEm = old.geradoEm; }
       else if (prev.ant != null) { r.ant = prev.ant; r.antEm = prev.antEm; }
     }
-    it.lojas[k] = r ? { ...r, cands: cands.slice(0, 4).map(slim) } : { nada: true, cands: cands.slice(0, 4).map(slim) };
+    it.lojas[k] = r ? { ...r, cands: cands.slice(0, 3).map(slim) } : { nada: true, cands: cands.slice(0, 3).map(slim) };
   } catch (e) {
     (erros[k] = erros[k] || []).push(`${it.desc}: ${e.message}`);
     const prev = ((oldBy.get(it.desc.toUpperCase()) || {}).lojas || {})[k];
