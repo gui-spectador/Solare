@@ -34,11 +34,20 @@ Site publicado: https://gui-spectador.github.io/Solare/ (Pages publica de `main`
 - **Leitura da extração de vendas**: `parseInWorker()` → `xlsxRows()` (lê o .xlsx em partes com `DecompressionStream`, todas as abas)
   → `encodeStream()` (colunas tipadas, dicionários). Completa células em branco/mescladas com o valor de cima, ignora linhas de total,
   conta linhas ignoradas e mostra ao lado do nome do arquivo (`skipNote`/`skipText`). Testado com 859 mil linhas.
-- **Cálculo de DC**: calendário de ofertas (`readCalendar`, `deriveLine`, `resolveLine`), regras `calBands` (bandeira; "TODAS" = todas as
-  lojas da extração), `calPraca` (BRASIL = todas; SP/RJ/NE/CO; INTERIOR/VALE = micro-regiões de SP; "LOJA nnn"), família inteira do PLU,
-  período início–fim. `runAction()` soma a quantidade por região (região pela coluna Região da extração; sem ela, pela UF) × IDC da região
-  (região sem IDC usa o de SP). Download `#dc-cal-dl` = planilha atualizada (ExcelJS): preenche QTD VENDIDA e INVESTIMENTO AD só onde o
-  investimento está vazio; se já preenchido e diferente do cálculo, mantém e escreve o cálculo na coluna **"Invest AD revisar"**.
+- **Cálculo de DC** (regras definidas pelo usuário em 15/11):
+  - **Família**: código da coluna FAMILIA (C) do calendário; os SKUs da família vêm da aba **BASE FAMILIA** do calendário
+    (`readExtras` → `CAL.famMap`, `applyFamilyBase`: a base manda; a família da extração vale só para SKU fora da base).
+    Coluna C vazia/0 → família do PLU (base, depois extração); sem família → só o PLU.
+  - **Filtros**: período início–fim; bandeira (`calBands`; "TODAS" = todas as lojas; extração sem coluna Bandeira = todas, com aviso);
+    praça (`calPraca`: BRASIL = todas; SP/RJ/NE/CO ou por extenso "SÃO PAULO E RIO DE JANEIRO", "NORDESTE", "CENTRO-OESTE";
+    INTERIOR/VALE = micro-regiões de SP; "LOJA nnn").
+  - **Quantidade** = soma de todos os SKUs da família no filtro (coluna S). **Investimento** = quantidade de cada região × IDC da região,
+    somado (coluna T); fornecedor com um IDC só (ou região sem IDC) usa o IDC de SP / o único disponível. `runAction()`.
+  - Só status **ABRIR**. Aprovado/Cancelado nunca mudam.
+  - Download `#dc-cal-dl` (ExcelJS): nada é apagado. T vazio ou **com fórmula** (não confiável, ex. =S×IDC SP) → grava S e T calculados.
+    T digitado e diferente do cálculo → mantém e escreve o cálculo na coluna **"Invest AD revisar"**.
+  - Funciona com a extração loja a loja ou com o **relatório consolidado sem lojas** (Dia, Bandeira, Região/UF, Produto, Família,
+    Fornecedor, Volume) — testado: mesmos números.
 - **Extração por fornecedor** (`extracaoPorPeriodo`): uma aba por período ABRIR, no formato da "APURAÇÃO - FRONERI" do usuário
   (vendas A–P; quadro SP/RJ/NE/CO em R–V: IDC, quantidade, investimento).
 - **Pacote para o Claude** (`#dc-diag`): .zip pequeno com calendário, cálculo do site por linha e só as vendas dos produtos das ações.
