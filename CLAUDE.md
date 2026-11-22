@@ -48,8 +48,10 @@ Site publicado: https://gui-spectador.github.io/Solare/ (Pages publica de `main`
     T digitado e diferente do cálculo → mantém e escreve o cálculo na coluna **"Invest AD revisar"**.
   - Funciona com a extração loja a loja ou com o **relatório consolidado sem lojas** (Dia, Bandeira, Região/UF, Produto, Família,
     Fornecedor, Volume) — testado: mesmos números.
-- **Extração por fornecedor** (`extracaoPorPeriodo`): uma aba por período ABRIR, no formato da "APURAÇÃO - FRONERI" do usuário
-  (vendas A–P; quadro SP/RJ/NE/CO em R–V: IDC, quantidade, investimento).
+- **Extração por fornecedor** (`extForns`, `extPeriods`, `extracaoPorPeriodo`): fornecedor = nome da coluna FORNECEDOR do calendário
+  (nomes que caem no mesmo fornecedor das vendas são unidos); traz **todas** as ofertas ABRIR dele, uma aba por período, inclusive
+  períodos sem venda (aba zerada), somando todos os arquivos de venda carregados. Formato da "APURAÇÃO - FRONERI" do usuário
+  (vendas A–P; um bloco por oferta com quadro SP/RJ/NE/CO em R–V: IDC, quantidade, investimento).
 - **Pacote para o Claude** (`#dc-diag`): .zip pequeno com calendário, cálculo do site por linha e só as vendas dos produtos das ações.
 - **Venda** (`vdShow`, `vdLoad`…): usa sozinha a extração do Cálculo de DC quando não há importação própria.
 - **Eye of the Sun** (`eos*`): olho WebGL + análise de produtos, preços concorrentes (`precos.json` do robô `eyes/eyes.mjs`).
