@@ -61,9 +61,9 @@ não atualizar sem o usuário pedir. A wiki fica em `wiki/` (Como usar, Regras d
 
 ## Situação atual e lições (leia `wiki/Erros-e-licoes.md`)
 
-- **Quantidade menor que a real** (ex.: família 9432, 06–08/11: 2.721 × 10.709; PLU 1161717 em Padaria): causa principal achada em
-  23/11 — `mergeDB` apagava as vendas dos mesmos dias do arquivo anterior quando o usuário carregava 2 arquivos do **mesmo período**.
-  Agora os arquivos se somam (só venda idêntica conta uma vez). Falta o usuário recarregar os 2 arquivos e confirmar os números.
+- **Quantidade menor que a real** (família 9432, 06–08/11: 2.721 × 10.709): causa real achada em 23/11 — `readExtras` lia a família
+  da aba "Familias Froneri" (coluna errada, 9836) antes da BASE FAMILIA. Agora só a aba BASE FAMILIA/FAMILIA vale. Também corrigido
+  em 23/11: `mergeDB` apagava vendas dos mesmos dias ao juntar 2 arquivos (agora soma). Há botão **Limpar** e aviso de base antiga.
 - **Pacote para o Claude**: só editor do link do artifact consegue enviar; os pacotes chegam como asset de texto (zip em base64).
 - **Antes de publicar, sempre**: cálculo independente em Python batendo exatamente; vendas em 1 arquivo, 2 do mesmo período, 2 de
   períodos diferentes e o mesmo arquivo 2× dando o mesmo número; calendário real sem ações ABRIR em "Revisar regra"; planilha original ×
