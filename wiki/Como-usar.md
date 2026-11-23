@@ -13,6 +13,10 @@ No menu lateral, **Sobremesas** ou **Padaria**. Cada categoria guarda as própri
    - Serve a extração loja a loja ou o relatório **consolidado sem lojas** (Dia, Bandeira, Região/UF, Produto, Família,
      Fornecedor, Volume).
    - Ao lado do nome do arquivo aparecem: linhas lidas, abas lidas, coluna usada como quantidade e linhas ignoradas.
+   - **Limpar** apaga do navegador as vendas guardadas da categoria (pede um segundo clique); o calendário continua e volta sozinho
+     quando as vendas novas entram. Use quando quiser recomeçar do zero.
+   - Se aparecer o aviso amarelo **"Recarregue as vendas"**: as vendas foram juntadas pela versão antiga (antes de 23/11). Clique em
+     **Limpar** (ou **Trocar**) e selecione **todos os arquivos juntos** — "+ Adicionar" não resolve.
 2. **Passo 2 — Calendário de ações**: a planilha de ofertas negociadas (aba 2026 em Sobremesas, Planilha1 em Padaria),
    com a aba de famílias (BASE FAMILIA / FAMILIA).
 3. **Baixar planilha atualizada**: grava S (quantidade) e T (investimento) das ações **ABRIR**. Veja as regras em
