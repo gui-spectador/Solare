@@ -13,6 +13,8 @@ No menu lateral, **Sobremesas** ou **Padaria**. Cada categoria guarda as própri
    - Serve a extração loja a loja ou o relatório **consolidado sem lojas** (Dia, Bandeira, Região/UF, Produto, Família,
      Fornecedor, Volume).
    - Ao lado do nome do arquivo aparecem: linhas lidas, abas lidas, coluna usada como quantidade e linhas ignoradas.
+   - Embaixo aparece a **lista dos arquivos somados** (nome, período, linhas). Confira se estão todos; se algum não entrou,
+     aparece o aviso "arquivo não entrou na soma" com o motivo.
    - **Limpar** apaga do navegador as vendas guardadas da categoria (pede um segundo clique); o calendário continua e volta sozinho
      quando as vendas novas entram. Use quando quiser recomeçar do zero.
    - Se aparecer o aviso amarelo **"Recarregue as vendas"**: as vendas foram juntadas pela versão antiga (antes de 23/11). Clique em
