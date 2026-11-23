@@ -33,3 +33,6 @@ Quantidade de cada região × IDC daquela região, somado.
 - T com **valor digitado** → mantém. Se for diferente do cálculo (mais de R$ 1 / 0,5%), escreve o cálculo na coluna
   **"Invest AD revisar"** (em vermelho). Essa coluna nunca é apagada.
 - Extração cobrindo só parte do período da ação → só marca para revisar quando o cálculo já passa do valor da planilha.
+- Opção **"Regravar ações já preenchidas com o cálculo atual"** (ao lado de Baixar planilha atualizada, desligada por padrão):
+  ligada, as ações a abrir já preenchidas também recebem S e T do cálculo atual (útil quando o calendário guardou valores de
+  downloads antigos). Aprovado/Cancelado nunca mudam; sem IDC, T fica como estava; extração parcial só regrava se o cálculo for maior.
