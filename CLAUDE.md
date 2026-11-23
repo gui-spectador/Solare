@@ -22,7 +22,10 @@ O robô Eyes faz commits sozinho (precos.json) duas vezes por dia: sempre `git p
 Antes de gerar o build, troque o snapshot embutido do Eyes por `null`:
 `<script type="application/json" id="eyes-snap">null</script>` (no site do GitHub o app lê `precos.json`).
 
-Site publicado: https://gui-spectador.github.io/Solare/ (Pages publica de `main`; `gh-pages` é mantido igual).
+**Desde 23/11 o usuário pediu para publicar só no artifact do Claude** (https://claude.ai/artifact/7fz7vdnrfQP5wCSPSQ8JeB):
+gere uma cópia do app.html com o snapshot do Eyes embutido (a partir de `precos.json`, sem `ean`/`disp`, até 4 `cands`) e publique
+com a ferramenta Artifact nesse `url`. O site do GitHub (https://gui-spectador.github.io/Solare/) ficou parado na versão de 23/11 —
+não atualizar sem o usuário pedir. A wiki fica em `wiki/` (Como usar, Regras de cálculo, Erros e lições, Layout e mascotes).
 
 ## Estrutura do app (procure por estes nomes no app.html)
 
@@ -56,14 +59,16 @@ Site publicado: https://gui-spectador.github.io/Solare/ (Pages publica de `main`
 - **Venda** (`vdShow`, `vdLoad`…): usa sozinha a extração do Cálculo de DC quando não há importação própria.
 - **Eye of the Sun** (`eos*`): olho WebGL + análise de produtos, preços concorrentes (`precos.json` do robô `eyes/eyes.mjs`).
 
-## Problema em aberto (prioridade)
+## Situação atual e lições (leia `wiki/Erros-e-licoes.md`)
 
-Na categoria **Padaria**, a quantidade vendida calculada vem **menor** que a real. Exemplo do usuário:
-PLU **1161717**, bandeira "TODAS AS BANDEIRAS", tipo "Nivel loja", 23/10/2026 a 25/10/2026 — o site deu ~12 mil unidades,
-o certo é **19.915**. A extração (APURACAO PADARIA 1 A 26-10) tem ~959 mil linhas; o calendário é "AÇÃO CONSOLIDADA - PADARIA".
-Já corrigido (ainda sem confirmação): "TODAS" passou a incluir Mini Extra e Minuto PA; leitura de todas as abas; células mescladas.
-Próximo passo: pedir as duas planilhas, carregar no site (Playwright, categoria Padaria) e comparar loja a loja a soma do PLU/família
-no período com a do site (bandeiras, praça, família, coluna de quantidade usada, linhas ignoradas).
+- **Quantidade menor que a real** (ex.: família 9432, 06–08/11: 2.721 × 10.709; PLU 1161717 em Padaria): causa principal achada em
+  23/11 — `mergeDB` apagava as vendas dos mesmos dias do arquivo anterior quando o usuário carregava 2 arquivos do **mesmo período**.
+  Agora os arquivos se somam (só venda idêntica conta uma vez). Falta o usuário recarregar os 2 arquivos e confirmar os números.
+- **Pacote para o Claude**: só editor do link do artifact consegue enviar; os pacotes chegam como asset de texto (zip em base64).
+- **Antes de publicar, sempre**: cálculo independente em Python batendo exatamente; vendas em 1 arquivo, 2 do mesmo período, 2 de
+  períodos diferentes e o mesmo arquivo 2× dando o mesmo número; calendário real sem ações ABRIR em "Revisar regra"; planilha original ×
+  baixada sem mudança fora de S/T; todas as funções sem erro de JS; versão no rodapé atualizada.
+- **Layout**: tema por categoria (Visual v4) com mascotes `MASCOTS` (pote de sorvete Froneri / baguete) e cores `TH` nos gráficos.
 
 ## Como testar
 
