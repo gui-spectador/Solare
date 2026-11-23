@@ -24,7 +24,7 @@ Soma da quantidade de todos os SKUs da família dentro do período, bandeira e p
 Quantidade de cada região × IDC daquela região, somado.
 - Fornecedor com **um IDC só**: toda a quantidade × esse IDC (mesmo em ação nacional).
 - Região sem IDC usa o IDC de SP (ou o único disponível).
-- Ação sem IDC nenhum: a quantidade é calculada, o investimento sai R$ 0,00.
+- Ação sem IDC nenhum: a quantidade é calculada e gravada em S; a coluna T **fica como estava** (o site não inventa R$ 0,00).
 
 ## 5. O que acontece na planilha baixada
 - Nenhuma informação é apagada: outras colunas, observações, subtotais e abas ficam iguais.
